@@ -8,4 +8,4 @@ const pricingPage = fs.readFileSync("./Content/HTML/pricing.html", "utf-8", 'r')
 const servicesPage = fs.readFileSync("./Content/HTML/services.html", "utf-8", 'r');
 const workPage = fs.readFileSync("./Content/HTML/work.html", "utf-8", 'r');
 
-console.log(workPage);
+module.exports = {aboutPage, blogPage, contactPage, indexPage, pricingPage, servicesPage, workPage};
