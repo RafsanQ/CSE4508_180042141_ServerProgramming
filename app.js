@@ -1,2 +1,9 @@
-const server = require("./http-module");
-server.server.listen(7777);
+const http = require('http');
+
+const server = http.createServer((req, res)=>{
+    
+    res.end();
+});
+
+
+server.listen(2141);
