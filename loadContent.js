@@ -1,13 +1,11 @@
 const fs = require("fs");
 
+const aboutPage = fs.readFileSync("./Content/HTML/about.html", "utf-8", 'r');
+const blogPage = fs.readFileSync("./Content/HTML/blog.html", "utf-8", 'r');
+const contactPage = fs.readFileSync("./Content/HTML/contact.html", "utf-8", 'r');
+const indexPage = fs.readFileSync("./Content/HTML/index.html", "utf-8", 'r');
+const pricingPage = fs.readFileSync("./Content/HTML/pricing.html", "utf-8", 'r');
+const servicesPage = fs.readFileSync("./Content/HTML/services.html", "utf-8", 'r');
+const workPage = fs.readFileSync("./Content/HTML/work.html", "utf-8", 'r');
 
-
-fs.readFile('i:/PoraLekha/5/Server Progrmming Lab/Lab_1_180042141/contents/avout.js', (err,data)=>{
-    if(err){
-        console.log("error:");
-        console.log(err);
-    } else {
-        console.log("read successful\n" + data);
-    }
-    
-});
+console.log(workPage);
