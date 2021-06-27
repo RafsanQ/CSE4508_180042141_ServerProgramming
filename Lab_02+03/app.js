@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
+const userRoutes = require('./Routes/userRoutes.routes.js');
 
+app.use(userRoutes)
 app.get("/", (req, res)=>{
     res.send("<H1>Home Page</H1>");
 })
