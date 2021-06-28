@@ -16,6 +16,8 @@ userRoutes.use(bodyParser.json())
 
 userRoutes.get("/login", getLogin)
 
+userRoutes.post("/login", isLoggedIn, postLogin)
+
 userRoutes.get("/dashboard", getDashBoard)
 
 userRoutes.get("/register", getRegister)
