@@ -39,7 +39,7 @@ const postRegister = (req, res)=>{
             throw err;
         }
 
-        res.redirect('/dashboard');
+        res.redirect('/login');
         
     })
 
@@ -52,11 +52,33 @@ const getLogin = (req, res)=>{
 }
 
 const postLogin = (req, res)=>{
-    res.redirect('/dashboard');
+    res.redirect(307, '/dashboard');
 }
 
 const getDashBoard = (req, res)=>{
     res.send(`dash board page`);
 }
 
-module.exports = {getRegister, postLogin, postRegister, getLogin, getDashBoard}
+const postDashBoard = (req, res)=>{
+    
+    const email = req.body.email;
+
+
+    // Create a connection to the mysql database
+    const db = mysql.createConnection({
+        host        : 'localhost',
+        user        : 'SuperUser',
+        password    : '1234',
+        database    : 'server programming lab 02/03'
+    })
+
+    const sqlQuery = "SELECT Name FROM users WHERE Email='" + email + "'";
+
+    db.query(sqlQuery, (err, result) => {
+        if(err) throw err;
+        res.send('dash board page. The username is ' + result[0].Name);
+    })
+
+}
+
+module.exports = {getRegister, postLogin, postRegister, getLogin, getDashBoard, postDashBoard}
