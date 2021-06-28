@@ -4,7 +4,7 @@ const userRoutes = require('./Routes/userRoutes.routes.js');
 
 app.use(userRoutes)
 app.get("/", (req, res)=>{
-    res.send("<H1>Home Page</H1>");
+    res.send("<H1>Home Page</H1><a href='/register'>Register Page</a>\n<a href='/login'>Login Page</a>");
 })
 
 app.get("/about", (req, res)=>{
