@@ -22,6 +22,6 @@ userRoutes.get("/dashboard", getDashBoard)
 
 userRoutes.get("/register", getRegister)
 
-userRoutes.post("/register", isLoggedIn, postRegister)
+userRoutes.post("/register", postRegister)
 
 module.exports = userRoutes;

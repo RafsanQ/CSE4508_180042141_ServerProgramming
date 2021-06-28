@@ -20,12 +20,13 @@ const isLoggedIn = (req, res, next)=>{
         if(err) throw err;
         console.log(result);
 
-        if(result.length == 1 && password == result.password){
+        console.log(result[0].Password + ' ' + password);
+        if(result.length >= 1 && password == result[0].Password){
             db.release;
             next();
         }  
         else
-            res.redirect("/dashboard");
+            res.redirect("/register");
         db.release;
     })
     
