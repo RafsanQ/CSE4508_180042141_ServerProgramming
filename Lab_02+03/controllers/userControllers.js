@@ -14,7 +14,7 @@ const postRegister = (req, res)=>{
     const gender = req.body.gender;
 
 
-    console.log("email:" + email + " username: " + username + " password: " + password + " gender: " + gender);
+    // console.log("email:" + email + " username: " + username + " password: " + password + " gender: " + gender);
 
     if(password != password2){
         res.redirect('./');
@@ -31,7 +31,7 @@ const postRegister = (req, res)=>{
 
     const sqlQuery = "INSERT INTO users (Email, Name, Gender, Password) VALUES ('" + email + "', '" + username + "', '" + gender + "', '" + password + "')";
 
-    console.log("Query= " + sqlQuery);
+    // console.log("Query= " + sqlQuery);
 
     db.query(sqlQuery, (err, result) => {
         if(err) {
