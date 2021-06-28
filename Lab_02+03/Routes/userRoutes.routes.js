@@ -6,7 +6,7 @@ userRoutes.get("/login", (req, res)=>{
 })
 
 userRoutes.get("/register", (req, res)=>{
-    res.send("This is Register Page");
+    res.sendFile("registerPage.html", {root: "./views/users/"});    
 })
 
 module.exports = userRoutes;
