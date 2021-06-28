@@ -3,6 +3,16 @@ const app = express();
 const userRoutes = require('./Routes/userRoutes.routes.js');
 
 app.use(userRoutes)
+
+const logger = (req, res, nxt)=>{
+    const method = req.method;
+    const url = req.url;
+    const date = new Date().getDate().toString();
+    console.log(method, url, date);
+    nxt();
+}
+
+app.use(logger)
 app.get("/", (req, res)=>{
     res.send("<H1>Home Page</H1><a href='/register'>Register Page</a>\n<a href='/login'>Login Page</a>");
 })
