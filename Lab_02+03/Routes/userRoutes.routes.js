@@ -10,7 +10,7 @@ const {
     getLogin,
     getDashBoard,
     postDashBoard
-} = require("./../controllers/userControllers.js")
+} = require("./../controllers/userControllers.js");
 
 userRoutes.use(bodyParser.urlencoded({extended: false}));
 userRoutes.use(bodyParser.json());
