@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const userRoutes = require('./Routes/userRoutes.routes.js');
 
+//static folder
+app.use(express.static("public"));
+app.set("view engine", "ejs");
+
 app.use(userRoutes)
 
 const logger = (req, res, nxt)=>{
@@ -14,7 +18,8 @@ const logger = (req, res, nxt)=>{
 
 app.use(logger)
 app.get("/", (req, res)=>{
-    res.send("<H1>Home Page</H1><a href='/register'>Register Page</a>\n<a href='/login'>Login Page</a>");
+    // res.send("<H1>Home Page</H1><a href='/register'>Register Page</a>\n<a href='/login'>Login Page</a>");
+    res.render("dashboard.ejs");
 })
 
 app.get("/about", (req, res)=>{
