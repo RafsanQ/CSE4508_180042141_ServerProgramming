@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const bcrypt = require('bcrypt');
 
 
 const getRegister = (req, res)=>{
@@ -48,7 +49,7 @@ const postRegister = (req, res)=>{
 
         if(result.length > 0){
             errors.push("Email already exists");
-        }  
+        }
     })
 
     if(errors.length > 0){
@@ -60,19 +61,46 @@ const postRegister = (req, res)=>{
 
     console.log("made it here");
 
-    const sqlQuery = "INSERT INTO users (Email, Name, Gender, Password) VALUES ('" + email + "', '" + username + "', '" + gender + "', '" + password + "')";
+    if(errors.length == 0){
+        bcrypt.genSalt(10, (err,salt) => {
+            if(err){
+                errors.push(err); 
+                req.flash("errors", errors);
+                res.redirect('./register');
+                db.release;
+                return;
+            }
+                 
+            else{
+                bcrypt.hash(password, salt, (err, hash) => {
+                    if(err){
+                        errors.push(err);
+                        req.flash("errors", errors);
+                        res.redirect('./register');
+                        db.release;
+                        return;
+                    }
+                        
+                    else{
+                        const passwordHashed = hash;
+                        const sqlQuery = "INSERT INTO users (Email, Name, Gender, Password) VALUES ('" + email + "', '" + username + "', '" + gender + "', '" + passwordHashed + "')";
 
-    // console.log("Query= " + sqlQuery);
+                         // console.log("Query= " + sqlQuery);
 
-    db.query(sqlQuery, (err, result) => {
-        if(err) {
-            res.redirect('/register')
-            throw err;
-        }
+                        db.query(sqlQuery, (err1, result) => {
+                            if(err1) {
+                                res.redirect('/register')
+                                throw err;
+                            }
 
-        res.redirect('/login');
+                            res.redirect('/login');
         
-    })
+                        })
+                    }     
+                })
+            }
+        })
+    }
 
     db.release;
     
