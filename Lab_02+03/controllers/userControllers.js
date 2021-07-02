@@ -3,7 +3,7 @@ const mysql = require('mysql');
 
 const getRegister = (req, res)=>{
     // res.sendFile("registerPage.html", {root: "./views/users/"});   
-    res.render("users/register.ejs");
+    res.render("users/register.ejs", {errors: req.flash('errors')});
 }
 
 const postRegister = (req, res)=>{
@@ -15,13 +15,6 @@ const postRegister = (req, res)=>{
     const gender = req.body.gender;
 
 
-    // console.log("email:" + email + " username: " + username + " password: " + password + " gender: " + gender);
-
-    if(password != password2){
-        res.redirect('./');
-        return;
-    }
-
     // Create a connection to the mysql database
     const db = mysql.createConnection({
         host        : 'localhost',
@@ -29,6 +22,43 @@ const postRegister = (req, res)=>{
         password    : '1234',
         database    : 'server programming lab 02/03'
     })
+
+
+    const errors = [];
+
+    console.log("email:" + email + " username: " + username + " password: " + password + " password2: " + password2 + " gender: " + gender);
+
+
+    if(!email || !username || !password || !password2 || !gender){
+        errors.push("All fields are required");
+    }
+
+    if(password.length < 6){
+        errors.push("Password must be atleast 6 characters in length");
+        
+    }
+    if(password != password2){
+        errors.push("Passwords do not match");
+    }
+
+    const sqlQueryEmailChecker = "SELECT * FROM users WHERE Email='" + email + "'";
+
+    db.query(sqlQueryEmailChecker, (err, result) => {
+        if(err) throw err;
+
+        if(result.length > 0){
+            errors.push("Email already exists");
+        }  
+    })
+
+    if(errors.length > 0){
+        req.flash("errors", errors);
+        res.redirect('./register');
+        db.release;
+        return;
+    }
+
+    console.log("made it here");
 
     const sqlQuery = "INSERT INTO users (Email, Name, Gender, Password) VALUES ('" + email + "', '" + username + "', '" + gender + "', '" + password + "')";
 
@@ -55,7 +85,12 @@ const getLogin = (req, res)=>{
 
 const postLogin = (req, res)=>{
     
-    res.redirect(307, '/dashboard');
+    // res.redirect(307, '/dashboard');
+
+    const email = req.body.email;
+    const password = req.body.password;
+
+
 }
 
 const getDashBoard = (req, res)=>{

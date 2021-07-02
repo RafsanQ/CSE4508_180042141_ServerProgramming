@@ -6,6 +6,21 @@ const userRoutes = require('./Routes/userRoutes.routes.js');
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
+// session and flash
+const session = require('express-session');
+const flash = require('connect-flash');
+
+app.use(
+    session({
+        secret: "secret",
+        resave: true,
+        saveUninitialized: true
+    })
+)
+
+app.use(flash()) 
+
+// user routes
 app.use(userRoutes)
 
 const logger = (req, res, nxt)=>{
