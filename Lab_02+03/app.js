@@ -19,7 +19,7 @@ const logger = (req, res, nxt)=>{
 app.use(logger)
 app.get("/", (req, res)=>{
     // res.send("<H1>Home Page</H1><a href='/register'>Register Page</a>\n<a href='/login'>Login Page</a>");
-    res.render("dashboard.ejs");
+    res.render("users/register.ejs");
 })
 
 app.get("/about", (req, res)=>{
