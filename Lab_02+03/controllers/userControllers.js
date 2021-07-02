@@ -2,7 +2,8 @@ const mysql = require('mysql');
 
 
 const getRegister = (req, res)=>{
-    res.sendFile("registerPage.html", {root: "./views/users/"});    
+    // res.sendFile("registerPage.html", {root: "./views/users/"});   
+    res.render("users/register.ejs");
 }
 
 const postRegister = (req, res)=>{
@@ -48,7 +49,8 @@ const postRegister = (req, res)=>{
 }
 
 const getLogin = (req, res)=>{
-    res.sendFile("loginPage.html", {root:"./views/users/"});
+    // res.sendFile("loginPage.html", {root:"./views/users/"});
+    res.render("users/login.ejs");
 }
 
 const postLogin = (req, res)=>{
