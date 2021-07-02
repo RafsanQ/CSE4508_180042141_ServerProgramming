@@ -112,11 +112,7 @@ const getLogin = (req, res)=>{
 }
 
 const postLogin = (req, res)=>{
-    
     res.redirect(307, '/dashboard');
-
-
-
 }
 
 const getDashBoard = (req, res)=>{
