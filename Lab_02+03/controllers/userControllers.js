@@ -113,10 +113,8 @@ const getLogin = (req, res)=>{
 
 const postLogin = (req, res)=>{
     
-    // res.redirect(307, '/dashboard');
+    res.redirect(307, '/dashboard');
 
-    const email = req.body.email;
-    const password = req.body.password;
 
 
 }
@@ -142,7 +140,10 @@ const postDashBoard = (req, res)=>{
 
     db.query(sqlQuery, (err, result) => {
         if(err) throw err;
-        res.send('dash board page. The username is ' + result[0].Name);
+
+        const username = result[0].Name;
+
+        res.render("dashboard.ejs", {Name: username});
     })
 
 }

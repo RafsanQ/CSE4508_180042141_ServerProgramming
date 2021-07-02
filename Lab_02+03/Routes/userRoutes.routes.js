@@ -19,7 +19,7 @@ userRoutes.get("/login", getLogin);
 
 userRoutes.post("/login", isLoggedIn, postLogin);
 
-userRoutes.get("/dashboard", getDashBoard);
+// userRoutes.get("/dashboard", getDashBoard);
 
 userRoutes.post("/dashboard", postDashBoard);
 
