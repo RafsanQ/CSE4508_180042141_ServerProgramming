@@ -1,48 +1,51 @@
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const app = express();
-const userRoutes = require('./Routes/userRoutes.routes.js');
+const session = require("express-session");
+const flash = require("connect-flash");
+const mongoose = require("mongoose");
+const passport = require("passport");
 
-//static folder
+//Passport Strategy
+require("./config/passport")(passport);
+
+//Connect to DB
+console.log(process.env.MongoURI);
+mongoose
+  .connect(process.env.MongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to Database!");
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+//Static Resources
 app.use(express.static("public"));
+//View Engine
 app.set("view engine", "ejs");
 
-// session and flash
-const session = require('express-session');
-const flash = require('connect-flash');
-
+//Session and Flash
 app.use(
-    session({
-        secret: "secret",
-        resave: true,
-        saveUninitialized: true
-    })
-)
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(flash()) 
+//Body Parser
+app.use(express.urlencoded({ extended: false }));
 
-// user routes
-app.use(userRoutes)
-
-const logger = (req, res, nxt)=>{
-    const method = req.method;
-    const url = req.url;
-    const date = new Date().getDate().toString();
-    console.log(method, url, date);
-    nxt();
-}
-
-app.use(logger)
-app.get("/", (req, res)=>{
-    res.send("<H1>Home Page</H1><a href='/register'>Register Page</a>\n<a href='/login'>Login Page</a>");
-    // res.render("users/register.ejs");
-})
-
-app.get("/about", (req, res)=>{
-    res.json({Name: "John", Age: "41", Profession: "None"})
-})
-
-app.use((req,res)=>{
-    res.status(401).send("Page does not exist");
-})
+//Routes
+const indexRoutes = require("./routes/index.routes");
+const userRoutes = require("./routes/users.routes");
+app.use(indexRoutes);
+app.use("/users", userRoutes);
 
 module.exports = app;
