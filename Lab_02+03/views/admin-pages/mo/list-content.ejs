@@ -8,7 +8,7 @@
             <div class="x_content">
                 <br/>
                 <%if(error.length>0){%>
-                    <%if(error=="Participant has been registered successfully."){%>
+                    <%if(error=="Data Deleted Successfully." || error=="Data Updated Successfully."){%>
                         <div class="alert alert-success"><%=error%></div>
                     <%}else{%>
                         <div class="alert alert-danger"><%=error%></div>
@@ -37,9 +37,9 @@
                                         <th>Total</th>
                                         <th>Paid</th>
                                         <th>Selected</th>
-                                        <th>Payment Status</th>
+                                        <th>Payment</br>Status</th>
                                         <th>Select</th>
-                                        <th>Payment Done</th>
+                                        <th>Payment</br>Done</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -47,6 +47,7 @@
                                 <tbody>
                                     <% if(participants.length>0){ %>
                                         <% participants.forEach(participant=>{ %>
+                                        <tr></tr>
                                             <td> <%= participant.name %> </td>
                                             <td> <%= participant.category %> </td>
                                             <td> <%= participant.contact %> </td>
@@ -64,7 +65,13 @@
                                                 <% } %>
                                             </td>
                                             <td>Select</td>
-                                            <td>Payment Done</td>
+                                            <td>
+                                                <% const paymentURL = 'paymentDone/' + participant._id %>
+                                                <a href = "<%= paymentURL %>">
+                                                    <i class="fa fa-money"></i>
+                                                    <span class="fa fa-chevron"></span>
+                                                </a>
+                                            </td>
                                             <td>Edit</td>
                                             <td>
                                                 <% const deleteURL = 'delete/' + participant._id %>
@@ -73,6 +80,7 @@
                                                     <span class="fa fa-chevron"></span>
                                                 </a>
                                             </td>
+                                        </tr>
                                         <% }) %>
                                     <% } %>
                                     

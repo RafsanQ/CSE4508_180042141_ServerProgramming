@@ -75,7 +75,40 @@ const getMOList = (req, res) => {
 
 const deleteMO = (req, res) => {
     const id = req.params.id;
+    mathOlympiad.deleteOne({_id:id}, (err)=>{
+        if(err){
+            error = "failed to delete data";
+            req.flash('error', error);
+            res.redirect('/MathOlympiad/list');
+        }else{
+            error = "Data Deleted Successfully.";
+            req.flash('error', error);
+            res.redirect('/MathOlympiad/list');
+        }
+    });
     console.log("ID found = " + id);
 }
 
-module.exports = {getMO, postMO, getMOList, deleteMO};
+const paymentDoneMO = (req, res) => {
+    const id = req.params.id;
+    mathOlympiad.findOne({_id:id}).then((participant) => {
+        const paid = participant.paid;
+        mathOlympiad.findByIdAndUpdate({_id:id}, {total: paid}, (err) => {
+            if(err){
+                error = "Failed to Update data";
+                req.flash('error', error);
+                res.redirect('/MathOlympiad/list');
+            }else{
+                error = "Data Updated Successfully.";
+                req.flash('error', error);
+                res.redirect('/MathOlympiad/list');
+            }
+        }).catch(() => {
+            error = "Failed to Update data. Unknown Error.";
+            req.flash('error', error);
+            res.redirect('/MathOlympiad/list');
+        })
+    })
+}
+
+module.exports = {getMO, postMO, getMOList, deleteMO, paymentDoneMO};
