@@ -64,7 +64,13 @@
                                                     <p style="color: brown;">Incomplete</p>
                                                 <% } %>
                                             </td>
-                                            <td>Select</td>
+                                            <td>
+                                                <% const selectURL = 'select/' + participant._id %>
+                                                <a href = "<%= selectURL %>">
+                                                    <i class="fa fa-check"></i>
+                                                    <span class="fa fa-chevron"></span>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <% const paymentURL = 'paymentDone/' + participant._id %>
                                                 <a href = "<%= paymentURL %>">
@@ -72,7 +78,13 @@
                                                     <span class="fa fa-chevron"></span>
                                                 </a>
                                             </td>
-                                            <td>Edit</td>
+                                            <td>
+                                                <% const editURL = 'edit/' + participant._id %>
+                                                <a href = "<%= editURL %>">
+                                                    <i class="fa fa-pencil"></i>
+                                                    <span class="fa fa-chevron"></span>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <% const deleteURL = 'delete/' + participant._id %>
                                                 <a href = "<%= deleteURL %>">
