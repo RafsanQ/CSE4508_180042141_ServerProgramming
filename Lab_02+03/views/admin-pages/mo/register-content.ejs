@@ -11,6 +11,15 @@
                     </div>
                     <div class="x_content">
                         <br />
+
+                        <%if(error.length>0){%>
+                            <%if(error=="Participant has been registered successfully."){%>
+                                <div class="alert alert-success"><%=error%></div>
+                            <%}else{%>
+                                <div class="alert alert-danger"><%=error%></div>
+                        <%   }%>    
+                        <%}%>
+
                         <form method="POST" action="/MathOlympiad/register" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                             <div class="item form-group">
@@ -25,7 +34,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Contact Number <span class="required" >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="contactNo" name="contactNo" required="required" class="form-control ">
+                                    <input type="text" id="contact" name="contact" required="required" class="form-control ">
                                 </div>
                             </div>
 
