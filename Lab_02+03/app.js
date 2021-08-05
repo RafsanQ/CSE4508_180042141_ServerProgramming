@@ -10,7 +10,6 @@ const passport = require("passport");
 require("./config/passport")(passport);
 
 //Connect to DB
-console.log(process.env.MongoURI);
 mongoose
   .connect(process.env.MongoURI, {
     useNewUrlParser: true,
