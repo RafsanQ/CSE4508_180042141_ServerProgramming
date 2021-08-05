@@ -66,7 +66,8 @@ const postRegister = (req, res) => {
                   .then(() => {
                     res.redirect("/users/login");
                   })
-                  .catch(() => {
+                  .catch((error) => {
+                    console.log(error)
                     errors.push("Saving User to the daatabase failed!");
                     req.flash("errors", errors);
                     res.redirect("/users/register");
