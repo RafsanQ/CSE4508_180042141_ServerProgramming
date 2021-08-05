@@ -17,7 +17,6 @@ const postMO = (req, res) => {
     const paid = 0;
     const selected = false;
     const date = new Date();
-    date.toLocaleDateString();
 
     let error = "";
 
@@ -57,8 +56,22 @@ const postMO = (req, res) => {
 }
 
 const getMOList = (req, res) => {
-    res.render('math-olympiad/list.ejs')
+    let all_participants = [];
+    mathOlympiad.find().then((data) => {
+        all_participants = data;
+        res.render("math-olympiad/list.ejs", {
+            error: req.flash('error'),
+            participants: all_participants
+        });
+    }).catch(() => {
+        error = 'Failed to fetch data';
+        res.render("math-olympiad/list.ejs", {
+            error: req.flash('error', error),
+            participants: all_participants
+        });
+    })
 }
+
 
 const deleteMO = (req, res) => {
     const id = req.params.id;
