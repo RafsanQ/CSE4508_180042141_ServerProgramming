@@ -111,4 +111,25 @@ const paymentDoneMO = (req, res) => {
     })
 }
 
-module.exports = {getMO, postMO, getMOList, deleteMO, paymentDoneMO};
+const selectMO = (req, res) => {
+    const id = req.params.id;
+    mathOlympiad.findOne({_id:id}).then((participant) => {
+        mathOlympiad.findByIdAndUpdate({_id:id}, {selected: true}, (err) => {
+            if(err){
+                error = "Failed to Update data";
+                req.flash('error', error);
+                res.redirect('/MathOlympiad/list');
+            }else{
+                error = "Data Updated Successfully.";
+                req.flash('error', error);
+                res.redirect('/MathOlympiad/list');
+            }
+        }).catch(() => {
+            error = "Failed to Update data. Unknown Error.";
+            req.flash('error', error);
+            res.redirect('/MathOlympiad/list');
+        })
+    })
+}
+
+module.exports = {getMO, postMO, getMOList, deleteMO, paymentDoneMO, selectMO};
