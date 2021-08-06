@@ -5,44 +5,41 @@ const getPC = (req, res) => {
 }
 
 const postPC = (req, res) => {
-    const {name, category, contact, email, institution, tshirt} = req.body;
-    console.log({name, category, contact, email, institution, tshirt});
-
-    let registrationFee = 0;
-    if(category == 'School') registrationFee = 250;
-    else if(category == 'College') registrationFee = 400;
-    else registrationFee = 500;
-
-    const total = registrationFee;
-    const paid = 0;
-    const selected = false;
-    const date = new Date();
-
+    const {teamName, institutionName, coachName, coachContact, coachEmail, coachTShirt, leaderName, leaderContact, leaderEmail, leaderTShirt, member1Name, member1Contact, member1Email, member1TShirt, member2Name, member2Contact, member2Email, member2TShirt} = req.body;
+    console.log({teamName, institutionName, coachName, coachContact, coachEmail, coachTShirt, leaderName, leaderContact, leaderEmail, leaderTShirt, member1Name, member1Contact, member1Email, member1TShirt, member2Name, member2Contact, member2Email, member2TShirt});
     let error = "";
 
-    programmingContest.findOne({name:name, contact:contact}).then((team) => {
+    programmingContest.findOne({teamName:teamName}).then((team) => {
         if(team){
             error = "Team with this name and contact already exists."
             req.flash('error', error);
             res.redirect('register');
         }else{
             const team = new programmingContest({
-                name,
-                category,
-                contact,
-                email,
-                institution,
-                total,
-                paid,
-                selected,
-                tshirt,
-                date
+                teamName, 
+                institutionName, 
+                coachName, 
+                coachContact, 
+                coachEmail, 
+                coachTShirt, 
+                leaderName, 
+                leaderContact, 
+                leaderEmail,
+                leaderTShirt, 
+                member1Name, 
+                member1Contact, 
+                member1Email, 
+                member1TShirt, 
+                member2Name, 
+                member2Contact, 
+                member2Email, 
+                member2TShirt
             });
 
-            participant
+            team
             .save()
             .then(()=>{
-                error = "Participant has been registered successfully.";
+                error = "Team has been registered successfully.";
                 req.flash('error', error);
                 res.redirect('register');
             })

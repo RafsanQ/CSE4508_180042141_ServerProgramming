@@ -60,7 +60,7 @@ const MOSchema = new mongoose.Schema({
         required: true
     },
 
-    member2hName:{
+    member2Name:{
         type: String,
         required: true
     },
