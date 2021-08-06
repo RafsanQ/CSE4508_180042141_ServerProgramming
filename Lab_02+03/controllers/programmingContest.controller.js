@@ -13,7 +13,7 @@ const postPC = (req, res) => {
 
     programmingContest.findOne({teamName:teamName}).then((team) => {
         if(team){
-            error = "Team with this name and contact already exists."
+            error = "Team with this name already exists."
             req.flash('error', error);
             res.redirect('register');
         }else{
