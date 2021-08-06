@@ -41,6 +41,7 @@
                                         <th>Team Member 2's Contact No.</th>
                                         <th>Team Member 2's E-mail </th>
                                         <th>Team Member 2's T-Shirt </th>
+                                        <th>Selected Status </th>
                                         <th>Select</th>
                                         <th>Edit</th>
                                         <th>Delete</th> 
@@ -68,18 +69,11 @@
                                             <td> <%= participant.member2Contact %> </td>
                                             <td> <%= participant.member2Email %> </td>
                                             <td> <%= participant.member2TShirt %> </td>
-
+                                            <td> <%= participant.selected %> </td>
                                             <td>
                                                 <% const selectURL = 'select/' + participant._id %>
                                                 <a href = "<%= selectURL %>">
                                                     <i class="fa fa-check"></i>
-                                                    <span class="fa fa-chevron"></span>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <% const paymentURL = 'paymentDone/' + participant._id %>
-                                                <a href = "<%= paymentURL %>">
-                                                    <i class="fa fa-money"></i>
                                                     <span class="fa fa-chevron"></span>
                                                 </a>
                                             </td>

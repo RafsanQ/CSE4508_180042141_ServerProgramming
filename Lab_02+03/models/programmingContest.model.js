@@ -76,6 +76,10 @@ const MOSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    selected:{
+        type: Boolean,
+        required: true
+    },
 });
 
 const programmingContest = mongoose.model("programmingContest", MOSchema);

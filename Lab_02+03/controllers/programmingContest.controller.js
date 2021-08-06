@@ -9,6 +9,8 @@ const postPC = (req, res) => {
     console.log({teamName, institutionName, coachName, coachContact, coachEmail, coachTShirt, leaderName, leaderContact, leaderEmail, leaderTShirt, member1Name, member1Contact, member1Email, member1TShirt, member2Name, member2Contact, member2Email, member2TShirt});
     let error = "";
 
+    selected = false;
+
     programmingContest.findOne({teamName:teamName}).then((team) => {
         if(team){
             error = "Team with this name and contact already exists."
@@ -33,7 +35,8 @@ const postPC = (req, res) => {
                 member2Name, 
                 member2Contact, 
                 member2Email, 
-                member2TShirt
+                member2TShirt,
+                selected
             });
 
             team
@@ -78,11 +81,11 @@ const deletePC = (req, res) => {
         if(err){
             error = "failed to delete data";
             req.flash('error', error);
-            res.redirect('/MathOlympiad/list');
+            res.redirect('/ProgrammingContest/list');
         }else{
             error = "Data Deleted Successfully.";
             req.flash('error', error);
-            res.redirect('/MathOlympiad/list');
+            res.redirect('/ProgrammingContest/list');
         }
     });
     console.log("ID found = " + id);
@@ -96,16 +99,16 @@ const selectPC = (req, res) => {
             if(err){
                 error = "Failed to Update data";
                 req.flash('error', error);
-                res.redirect('/MathOlympiad/list');
+                res.redirect('/ProgrammingContest/list');
             }else{
                 error = "Data Updated Successfully.";
                 req.flash('error', error);
-                res.redirect('/MathOlympiad/list');
+                res.redirect('/ProgrammingContest/list');
             }
         }).catch(() => {
             error = "Failed to Update data. Unknown Error.";
             req.flash('error', error);
-            res.redirect('/MathOlympiad/list');
+            res.redirect('/ProgrammingContest/list');
         })
     })
 }
