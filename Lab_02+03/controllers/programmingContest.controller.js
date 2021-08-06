@@ -6,7 +6,6 @@ const getPC = (req, res) => {
 
 const postPC = (req, res) => {
     const {teamName, institutionName, coachName, coachContact, coachEmail, coachTShirt, leaderName, leaderContact, leaderEmail, leaderTShirt, member1Name, member1Contact, member1Email, member1TShirt, member2Name, member2Contact, member2Email, member2TShirt} = req.body;
-    console.log({teamName, institutionName, coachName, coachContact, coachEmail, coachTShirt, leaderName, leaderContact, leaderEmail, leaderTShirt, member1Name, member1Contact, member1Email, member1TShirt, member2Name, member2Contact, member2Email, member2TShirt});
     let error = "";
 
     selected = false;
@@ -57,10 +56,8 @@ const postPC = (req, res) => {
 
 const getPCList = (req, res) => {
     let all_participants = [];
-    console.log("HERE");
     programmingContest.find().then((data) => {
         all_participants = data;
-        console.log(all_participants)
         res.render("programming-contest/list.ejs", {
             error: req.flash('error'),
             participants: all_participants
@@ -88,7 +85,6 @@ const deletePC = (req, res) => {
             res.redirect('/ProgrammingContest/list');
         }
     });
-    console.log("ID found = " + id);
 }
 
 
@@ -113,4 +109,52 @@ const selectPC = (req, res) => {
     })
 }
 
-module.exports = {getPC, postPC, getPCList, deletePC, selectPC};
+const getUpdatePC = (req, res) => {
+    const id = req.params.id;
+    res.render("programming-contest/update.ejs", {
+        error: req.flash('error'),
+        id:id
+    });
+}
+
+const postUpdatePC = (req, res) => {
+   const {id, teamName, institutionName, coachName, coachContact, coachEmail, coachTShirt, leaderName, leaderContact, leaderEmail, leaderTShirt, member1Name, member1Contact, member1Email, member1TShirt, member2Name, member2Contact, member2Email, member2TShirt} = req.body;
+   programmingContest.findOne({_id:id}).then((team) => {
+    programmingContest.findByIdAndUpdate({_id:id}, {
+        teamName: teamName, 
+        institutionName: institutionName, 
+        coachName: coachName, 
+        coachContact: coachContact, 
+        coachEmail: coachEmail, 
+        coachTShirt: coachTShirt, 
+        leaderName: leaderName, 
+        leaderContact: leaderContact, 
+        leaderEmail: leaderEmail, 
+        leaderTShirt: leaderTShirt, 
+        member1Name: member1Name, 
+        member1Contact: member1Contact,
+        member1Email: member1Email, 
+        member1TShirt: member1TShirt, 
+        member2Name: member2Name, 
+        member2Contact: member2Contact, 
+        member2Email: member2Email, 
+        member2TShirt: member2TShirt
+    }, (err) => {
+        if(err){
+            error = "Failed to Update data";
+            req.flash('error', error);
+            res.redirect('/ProgrammingContest/list');
+        }else{
+            error = "Data Updated Successfully.";
+            req.flash('error', error);
+            res.redirect('/ProgrammingContest/list');
+        }
+    }).catch(() => {
+        error = "Failed to Update data. Unknown Error.";
+        req.flash('error', error);
+        res.redirect('/ProgrammingContest/list');
+    })
+})
+}
+
+module.exports = {getPC, postPC, getPCList, deletePC, selectPC, getUpdatePC, postUpdatePC};
