@@ -6,7 +6,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Math Olympiad <small>Register a Participant</small></h2>
+                        <h2>Math Olympiad <small>Update a Participant</small></h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -20,8 +20,12 @@
                         <%   }%>    
                         <%}%>
 
-                        <form method="POST" action="/MathOlympiad/register" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                        <form method="POST" action="/MathOlympiad/update/" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
+                            
+                            <input type="hidden" name="id" id="id" value="<%- id %>" readonly class="form-control"/>
+                               
+                            
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Name <span class="required" >*</span>
                                 </label>
@@ -81,6 +85,22 @@
                                             <option value="XL">Extra Large</option>
                                         </select>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Total <span class="required" >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="number" id="total" name="total" required="required" class="form-control ">
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Paid <span class="required" >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="number" id="paid" name="paid" required="required" class="form-control ">
                                 </div>
                             </div>
                             

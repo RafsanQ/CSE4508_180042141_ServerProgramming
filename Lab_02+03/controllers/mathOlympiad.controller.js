@@ -86,14 +86,13 @@ const deleteMO = (req, res) => {
             res.redirect('/MathOlympiad/list');
         }
     });
-    console.log("ID found = " + id);
 }
 
 const paymentDoneMO = (req, res) => {
     const id = req.params.id;
     mathOlympiad.findOne({_id:id}).then((participant) => {
-        const paid = participant.paid;
-        mathOlympiad.findByIdAndUpdate({_id:id}, {total: paid}, (err) => {
+        const total = participant.total;
+        mathOlympiad.findByIdAndUpdate({_id:id}, {paid: total}, (err) => {
             if(err){
                 error = "Failed to Update data";
                 req.flash('error', error);
@@ -132,4 +131,46 @@ const selectMO = (req, res) => {
     })
 }
 
-module.exports = {getMO, postMO, getMOList, deleteMO, paymentDoneMO, selectMO};
+const getUpdateMO = (req, res) => {
+    const id = req.params.id;
+    res.render("math-olympiad/update.ejs", {
+        error: req.flash('error'),
+        id:id
+    });
+}
+
+const postUpdateMO = (req, res) => {
+    const {
+        id,
+        name, 
+        category, 
+        contact, 
+        email, 
+        institution, 
+        tshirt,
+        total,
+        paid
+    } = req.body;
+
+
+
+    mathOlympiad.findOne({_id:id}).then((participant) => {
+        mathOlympiad.findByIdAndUpdate({_id:id}, {name: name, category: category, contact: contact, email: email, institution: institution, tshirt: tshirt, total: total, paid: paid}, (err) => {
+            if(err){
+                error = "Failed to Update data";
+                req.flash('error', error);
+                res.redirect('update/:id');
+            }else{
+                error = "Data Updated Successfully.";
+                req.flash('error', error);
+                res.redirect('/MathOlympiad/list');
+            }
+        }).catch(() => {
+            error = "Failed to Update data. Unknown Error.";
+            req.flash('error', error);
+            res.redirect('update/:id');
+        })
+    })
+}
+
+module.exports = {getMO, postMO, getMOList, deleteMO, paymentDoneMO, selectMO, getUpdateMO, postUpdateMO};

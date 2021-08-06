@@ -9,7 +9,9 @@ const {
     getMOList,
     deleteMO,
     paymentDoneMO,
-    selectMO
+    selectMO,
+    getUpdateMO,
+    postUpdateMO
 } = require("./../controllers/mathOlympiad.controller");
 
 router.get("/register", ensureAuthenticated, addUserData, getMO);
@@ -18,5 +20,8 @@ router.get('/list', ensureAuthenticated, addUserData, getMOList);
 router.get('/delete/:id', ensureAuthenticated, addUserData, deleteMO);
 router.get('/paymentDone/:id', ensureAuthenticated, addUserData, paymentDoneMO);
 router.get('/select/:id', ensureAuthenticated, addUserData, selectMO);
+
+router.get('/update/:id', ensureAuthenticated, addUserData, getUpdateMO);
+router.post('/update', ensureAuthenticated, addUserData, postUpdateMO);
 
 module.exports = router;
