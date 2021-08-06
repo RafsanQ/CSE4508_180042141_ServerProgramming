@@ -94,8 +94,8 @@ const deletePC = (req, res) => {
 
 const selectPC = (req, res) => {
     const id = req.params.id;
-    mathOlympiad.findOne({_id:id}).then((participant) => {
-        mathOlympiad.findByIdAndUpdate({_id:id}, {selected: true}, (err) => {
+    programmingContest.findOne({_id:id}).then((participant) => {
+        programmingContest.findByIdAndUpdate({_id:id}, {selected: true}, (err) => {
             if(err){
                 error = "Failed to Update data";
                 req.flash('error', error);
