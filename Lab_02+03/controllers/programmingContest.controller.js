@@ -57,6 +57,7 @@ const getPCList = (req, res) => {
     console.log("HERE");
     programmingContest.find().then((data) => {
         all_participants = data;
+        console.log(all_participants)
         res.render("programming-contest/list.ejs", {
             error: req.flash('error'),
             participants: all_participants

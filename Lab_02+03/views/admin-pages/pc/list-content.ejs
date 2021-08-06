@@ -50,12 +50,25 @@
                                     <% if(participants.length>0){ %>
                                         <% participants.forEach(participant=>{ %>
                                         <tr></tr>
-                                            <td> <%= participant.name %> </td>
-                                            <td> <%= participant.category %> </td>
-                                            <td> <%= participant.contact %> </td>
-                                            <td> <%= participant.email %> </td>
-                                            <td> <%= participant.institution %> </td>
-                                            <td> <%= participant.tshirt %> </td>
+                                            <td> <%= participant.teamName %> </td>
+                                            <td> <%= participant.institutionName %> </td>
+                                            <td> <%= participant.coachName %> </td>
+                                            <td> <%= participant.coachContact %> </td>
+                                            <td> <%= participant.coachEmail %> </td>
+                                            <td> <%= participant.coachTShirt %> </td>
+                                            <td> <%= participant.leaderName %> </td>
+                                            <td> <%= participant.leaderContact %> </td>
+                                            <td> <%= participant.leaderEmail %> </td>
+                                            <td> <%= participant.leaderTShirt %> </td>
+                                            <td> <%= participant.member1Name %> </td>
+                                            <td> <%= participant.member1Contact %> </td>
+                                            <td> <%= participant.member1Email %> </td>
+                                            <td> <%= participant.member1TShirt %> </td>
+                                            <td> <%= participant.member2Name %> </td>
+                                            <td> <%= participant.member2Contact %> </td>
+                                            <td> <%= participant.member2Email %> </td>
+                                            <td> <%= participant.member2TShirt %> </td>
+
                                             <td> <%= participant.total %> </td>
                                             <td> <%= participant.paid %> </td>
                                             <td> <%= participant.selected %> </td>
