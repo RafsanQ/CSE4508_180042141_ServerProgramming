@@ -69,16 +69,6 @@
                                             <td> <%= participant.member2Email %> </td>
                                             <td> <%= participant.member2TShirt %> </td>
 
-                                            <td> <%= participant.total %> </td>
-                                            <td> <%= participant.paid %> </td>
-                                            <td> <%= participant.selected %> </td>
-                                            <td>
-                                                <% if(participant.paid == participant.total){ %>
-                                                    <p style="color: green;">Successful</p> 
-                                                <% }else{ %> 
-                                                    <p style="color: brown;">Incomplete</p>
-                                                <% } %>
-                                            </td>
                                             <td>
                                                 <% const selectURL = 'select/' + participant._id %>
                                                 <a href = "<%= selectURL %>">
