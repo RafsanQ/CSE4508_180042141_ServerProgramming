@@ -77,7 +77,7 @@ const getPCList = (req, res) => {
 
 const deletePC = (req, res) => {
     const id = req.params.id;
-    mathOlympiad.deleteOne({_id:id}, (err)=>{
+    programmingContest.deleteOne({_id:id}, (err)=>{
         if(err){
             error = "failed to delete data";
             req.flash('error', error);
