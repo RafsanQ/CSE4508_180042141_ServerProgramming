@@ -54,6 +54,7 @@ const postPC = (req, res) => {
 
 const getPCList = (req, res) => {
     let all_participants = [];
+    console.log("HERE");
     programmingContest.find().then((data) => {
         all_participants = data;
         res.render("programming-contest/list.ejs", {
@@ -86,27 +87,6 @@ const deletePC = (req, res) => {
     console.log("ID found = " + id);
 }
 
-const paymentDonePC = (req, res) => {
-    const id = req.params.id;
-    mathOlympiad.findOne({_id:id}).then((participant) => {
-        const paid = participant.paid;
-        mathOlympiad.findByIdAndUpdate({_id:id}, {total: paid}, (err) => {
-            if(err){
-                error = "Failed to Update data";
-                req.flash('error', error);
-                res.redirect('/MathOlympiad/list');
-            }else{
-                error = "Data Updated Successfully.";
-                req.flash('error', error);
-                res.redirect('/MathOlympiad/list');
-            }
-        }).catch(() => {
-            error = "Failed to Update data. Unknown Error.";
-            req.flash('error', error);
-            res.redirect('/MathOlympiad/list');
-        })
-    })
-}
 
 const selectPC = (req, res) => {
     const id = req.params.id;
@@ -129,4 +109,4 @@ const selectPC = (req, res) => {
     })
 }
 
-module.exports = {getPC, postPC, getPCList, deletePC, paymentDonePC, selectPC};
+module.exports = {getPC, postPC, getPCList, deletePC, selectPC};
