@@ -50,44 +50,44 @@
                                 </thead>
                                 <tbody>
                                     <% if(participants.length>0){ %>
-                                        <% participants.forEach(participant=>{ %>
+                                        <% participants.forEach(Team=>{ %>
                                         <tr></tr>
-                                            <td> <%= participant.teamName %> </td>
-                                            <td> <%= participant.institutionName %> </td>
-                                            <td> <%= participant.coachName %> </td>
-                                            <td> <%= participant.coachContact %> </td>
-                                            <td> <%= participant.coachEmail %> </td>
-                                            <td> <%= participant.coachTShirt %> </td>
-                                            <td> <%= participant.leaderName %> </td>
-                                            <td> <%= participant.leaderContact %> </td>
-                                            <td> <%= participant.leaderEmail %> </td>
-                                            <td> <%= participant.leaderTShirt %> </td>
-                                            <td> <%= participant.member1Name %> </td>
-                                            <td> <%= participant.member1Contact %> </td>
-                                            <td> <%= participant.member1Email %> </td>
-                                            <td> <%= participant.member1TShirt %> </td>
-                                            <td> <%= participant.member2Name %> </td>
-                                            <td> <%= participant.member2Contact %> </td>
-                                            <td> <%= participant.member2Email %> </td>
-                                            <td> <%= participant.member2TShirt %> </td>
-                                            <td> <%= participant.hashValue %> </td>
-                                            <td> <%= participant.selected %> </td>
+                                            <td> <%= Team.teamName %> </td>
+                                            <td> <%= Team.institutionName %> </td>
+                                            <td> <%= Team.coachName %> </td>
+                                            <td> <%= Team.coachContact %> </td>
+                                            <td> <%= Team.coachEmail %> </td>
+                                            <td> <%= Team.coachTShirt %> </td>
+                                            <td> <%= Team.leaderName %> </td>
+                                            <td> <%= Team.leaderContact %> </td>
+                                            <td> <%= Team.leaderEmail %> </td>
+                                            <td> <%= Team.leaderTShirt %> </td>
+                                            <td> <%= Team.member1Name %> </td>
+                                            <td> <%= Team.member1Contact %> </td>
+                                            <td> <%= Team.member1Email %> </td>
+                                            <td> <%= Team.member1TShirt %> </td>
+                                            <td> <%= Team.member2Name %> </td>
+                                            <td> <%= Team.member2Contact %> </td>
+                                            <td> <%= Team.member2Email %> </td>
+                                            <td> <%= Team.member2TShirt %> </td>
+                                            <td> <%= Team.hashValue %> </td>
+                                            <td> <%= Team.selected %> </td>
                                             <td>
-                                                <% const selectURL = 'select/' + participant._id %>
+                                                <% const selectURL = 'select/' + Team._id %>
                                                 <a href = "<%= selectURL %>">
                                                     <i class="fa fa-check"></i>
                                                     <span class="fa fa-chevron"></span>
                                                 </a>
                                             </td>
                                             <td>
-                                                <% const updateURL = 'update/' + participant._id %>
+                                                <% const updateURL = 'update/' + Team._id %>
                                                 <a href = "<%= updateURL %>">
                                                     <i class="fa fa-pencil"></i>
                                                     <span class="fa fa-chevron"></span>
                                                 </a>
                                             </td>
                                             <td>
-                                                <% const deleteURL = 'delete/' + participant._id %>
+                                                <% const deleteURL = 'delete/' + Team._id %>
                                                 <a href = "<%= deleteURL %>">
                                                     <i class="fa fa-trash"></i>
                                                     <span class="fa fa-chevron"></span>
