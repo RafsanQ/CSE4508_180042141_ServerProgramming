@@ -53,10 +53,10 @@ const postPC = (req, res) => {
                 error = "Team has been registered successfully.";
 
                 // Send everyone an email with the hash
-                mail(leaderEmail, hashID);
-                mail(member1Email, hashID);
-                mail(member2Email, hashID);
-                mail(coachEmail, hashID);
+                mail(leaderEmail, hashID, teamName, leaderName);
+                mail(member1Email, hashID, teamName, member1Name);
+                mail(member2Email, hashID, teamName, member2Name);
+                mail(coachEmail, hashID, teamName, coachName);
 
                 req.flash('error', error);
                 res.redirect('register');
