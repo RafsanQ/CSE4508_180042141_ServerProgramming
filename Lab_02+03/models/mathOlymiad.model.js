@@ -40,6 +40,10 @@
         type: Date,
         required: true
     },
+    hashValue: {
+        type: String,
+        required: true
+    },
  });
 
  const mathOlympiad = mongoose.model("mathOlympiad", MOSchema);
