@@ -1,5 +1,6 @@
 const mathOlympiad = require('../models/mathOlymiad.model')
-const mail = require('../Node Mailer Stuff/mailer')
+const mail = require('../Node Mailer Stuff/mathOlympiad.mailer')
+const crypto = require('crypto');
 
 const getMO = (req, res) => {
     res.render('math-olympiad/register.ejs', {error:req.flash('error')})
@@ -27,6 +28,20 @@ const postMO = (req, res) => {
             req.flash('error', error);
             res.redirect('register');
         }else{
+
+            // Create Unique code by hashing the name
+            const hashID = crypto.createHash('sha1')
+            .update(name)
+            .digest('hex');
+
+            mailRes = mail(email, hashID);
+            if(mailRes){
+                error = "Email Could not be sent.";
+                req.flash('error', error);
+                res.redirect('register');
+                return;
+            }
+            
             const participant = new mathOlympiad({
                 name,
                 category,
@@ -37,7 +52,8 @@ const postMO = (req, res) => {
                 paid,
                 selected,
                 tshirt,
-                date
+                date,
+                hashValue: hashID,
             });
 
             participant
@@ -46,8 +62,6 @@ const postMO = (req, res) => {
                 error = "Participant has been registered successfully.";
                 req.flash('error', error);
                 res.redirect('register');
-                console.log("Mailing...")
-                mail(email);
             })
             .catch((e)=>{
                 error = "Unexpected error has occured";
