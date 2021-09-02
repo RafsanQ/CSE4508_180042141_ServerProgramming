@@ -34,7 +34,7 @@ const postMO = (req, res) => {
             .update(name)
             .digest('hex');
 
-            mailRes = mail(email, hashID);
+            mailRes = mail(email, hashID, name);
             if(mailRes){
                 error = "Email Could not be sent.";
                 req.flash('error', error);

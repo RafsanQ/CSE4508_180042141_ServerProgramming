@@ -8,13 +8,13 @@ const transporter = nodeMailer.createTransport({
     }
 });
 
-const mail = (recipientMail, hashCode) => {
+const mail = (recipientMail, hashCode, participantName) => {
     console.log("Sending Mail form mailer...");
     const options = {
         from: 'iutfest2021@outlook.com',
         to: recipientMail,
         subject: 'Participation Confirmtion - Math Olympiad',
-        text: `Thank you for registering for our Math Olympiad Contest. Below is the code that you will use.\n${hashCode}`
+        text: `Thank you ${participantName} for registering for our Math Olympiad Contest. Below is the code that you will use.\n${hashCode}`
     }
     
     transporter.sendMail(options, (err, info) => {
