@@ -21,7 +21,7 @@ const getRegister = (req, res) => {
 const postRegister = (req, res) => {
   const { name, email, password, confirm_password } = req.body;
 
-  //Data Validation
+  //Data Validation 
   const errors = [];
   if (!name || !email || !password || !confirm_password) {
     errors.push("All fields are required!");
@@ -61,6 +61,7 @@ const postRegister = (req, res) => {
                   email,
                   password: hash,
                 });
+
                 newUser
                   .save()
                   .then(() => {
@@ -68,10 +69,11 @@ const postRegister = (req, res) => {
                   })
                   .catch((error) => {
                     console.log(error)
-                    errors.push("Saving User to the daatabase failed!");
+                    errors.push("Saving User to the database failed!");
                     req.flash("errors", errors);
                     res.redirect("/users/register");
                   });
+
               }
             });
           }
