@@ -8,7 +8,6 @@ const MOSchema = new mongoose.Schema({
         type: String,
         required: true
    },
-
    coachName:{
         type: String,
         required: true
@@ -78,6 +77,10 @@ const MOSchema = new mongoose.Schema({
     },
     selected:{
         type: Boolean,
+        required: true
+    },
+    hashValue:{
+        type: String,
         required: true
     },
 });

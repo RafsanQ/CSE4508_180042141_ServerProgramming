@@ -1,4 +1,7 @@
 const programmingContest = require('../models/programmingContest.model')
+const mail = require('../Node Mailer Stuff/programmingContest.mailer')
+const crypto = require('crypto');
+const { hash } = require('bcryptjs');
 
 const getPC = (req, res) => {
     res.render('programming-contest/register.ejs', {error:req.flash('error')})
@@ -9,6 +12,11 @@ const postPC = (req, res) => {
     let error = "";
 
     selected = false;
+
+    // Create Unique code by hashing the team name
+    const hashID = crypto.createHash('sha1')
+    .update(teamName)
+    .digest('hex');
 
     programmingContest.findOne({teamName:teamName}).then((team) => {
         if(team){
@@ -35,13 +43,21 @@ const postPC = (req, res) => {
                 member2Contact, 
                 member2Email, 
                 member2TShirt,
-                selected
+                selected,
+                hashValue: hashID,
             });
 
             team
             .save()
             .then(()=>{
                 error = "Team has been registered successfully.";
+
+                // Send everyone an email with the hash
+                mail(leaderEmail, hashID);
+                mail(member1Email, hashID);
+                mail(member2Email, hashID);
+                mail(coachEmail, hashID);
+
                 req.flash('error', error);
                 res.redirect('register');
             })
