@@ -1,0 +1,108 @@
+<div class="right_col" role="main">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Programming Contest<small>Teams List</small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br/>
+                <%if(error.length>0){%>
+                    <%if(error=="Data Deleted Successfully." || error=="Data Updated Successfully."){%>
+                        <div class="alert alert-success"><%=error%></div>
+                    <%}else{%>
+                        <div class="alert alert-danger"><%=error%></div>
+                <%   }%>    
+                <%}%>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+
+                            <table id="datatable-responsive"
+                                class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                                width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Team Name</th>
+                                        <th>Institution</th>
+                                        <th>Coach's Name</th>
+                                        <th>Coach's Contact No. </th>
+                                        <th>Coach's E-mail </th>
+                                        <th>Coach's T-Shirt</th>
+                                        <th>Team Leader's Name </th>
+                                        <th>Team Leader's Contact No.</th>
+                                        <th>Team Leader's E-mail</th>
+                                        <th>Team Leader's T-Shirt </th>
+                                        <th>Team Member 1's Name</th>
+                                        <th>Team Member 1's Contact No.</th>
+                                        <th>Team Member 1's E-mail</th>
+                                        <th>Team Member 1's T-Shirt</th>
+                                        <th>Team Member 2's Name</th>
+                                        <th>Team Member 2's Contact No.</th>
+                                        <th>Team Member 2's E-mail </th>
+                                        <th>Team Member 2's T-Shirt </th>
+                                        <th>Hash Value</th>
+                                        <th>Selected Status </th>
+                                        <th>Select</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th> 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if(participants.length>0){ %>
+                                        <% participants.forEach(Team=>{ %>
+                                        <tr></tr>
+                                            <td> <%= Team.teamName %> </td>
+                                            <td> <%= Team.institutionName %> </td>
+                                            <td> <%= Team.coachName %> </td>
+                                            <td> <%= Team.coachContact %> </td>
+                                            <td> <%= Team.coachEmail %> </td>
+                                            <td> <%= Team.coachTShirt %> </td>
+                                            <td> <%= Team.leaderName %> </td>
+                                            <td> <%= Team.leaderContact %> </td>
+                                            <td> <%= Team.leaderEmail %> </td>
+                                            <td> <%= Team.leaderTShirt %> </td>
+                                            <td> <%= Team.member1Name %> </td>
+                                            <td> <%= Team.member1Contact %> </td>
+                                            <td> <%= Team.member1Email %> </td>
+                                            <td> <%= Team.member1TShirt %> </td>
+                                            <td> <%= Team.member2Name %> </td>
+                                            <td> <%= Team.member2Contact %> </td>
+                                            <td> <%= Team.member2Email %> </td>
+                                            <td> <%= Team.member2TShirt %> </td>
+                                            <td> <%= Team.hashValue %> </td>
+                                            <td> <%= Team.selected %> </td>
+                                            <td>
+                                                <% const selectURL = 'select/' + Team._id %>
+                                                <a href = "<%= selectURL %>">
+                                                    <i class="fa fa-check"></i>
+                                                    <span class="fa fa-chevron"></span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <% const updateURL = 'update/' + Team._id %>
+                                                <a href = "<%= updateURL %>">
+                                                    <i class="fa fa-pencil"></i>
+                                                    <span class="fa fa-chevron"></span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <% const deleteURL = 'delete/' + Team._id %>
+                                                <a href = "<%= deleteURL %>">
+                                                    <i class="fa fa-trash"></i>
+                                                    <span class="fa fa-chevron"></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                    <% } %>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
